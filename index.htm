@@ -7,6 +7,15 @@
         <title>DotDNA</title>
         <link rel="shortcut icon" href="logo.svg" type="image/x-icon">
 	  
+<script>
+// Monkey-patch style access to prevent crash
+const originalQuerySelector = document.querySelector;
+document.querySelector = function(sel) {
+  const el = originalQuerySelector.call(document, sel);
+  if (!el) return new Proxy({}, { get: () => () => {} }); // dummy fallback
+  return el;
+};
+</script>
 
       <script  crossorigin="" src="/js/main.min.js"></script>
       <link rel="stylesheet" crossorigin="" href="css/style.min.css">
