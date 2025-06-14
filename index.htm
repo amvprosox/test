@@ -1,39 +1,24 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Content-Security-Policy: script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' 'inline-speculation-rules';">
         <title>DotDNA</title>
         <link rel="shortcut icon" href="logo.svg" type="image/x-icon">
-	  
-<script>
-// Prevent crash on missing DOM elements
-const originalQS = document.querySelector;
-document.querySelector = function(sel) {
-  const el = originalQS.call(document, sel);
-  if (!el) {
-    console.warn(`Element not found: "${sel}" — patched to avoid crash.`);
-    return new Proxy({}, {
-      get: () => () => {} // Return empty functions for all calls
-    });
-  }
-  return el;
-};
-</script>
-
-<script>
-  document.getElementById("root").innerHTML = "<h1 style='color:white'>React shell loaded</h1>";
-</script>
-
-     <script src="/js/main.min.js"></script>
-
+      <script type="module" crossorigin="" src="js/main.min.js"></script>
       <link rel="stylesheet" crossorigin="" href="css/style.min.css">
     </head>
-    
+    <!-- Google tag (gtag.js) -->
+<script async="" src="gtag/js?id=G-WBQFELEVT7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WBQFELEVT7');
+</script>
     <body>
         <div id="root"></div>
-        <script src="/libs/SplitText.min-1.js"></script>
+        <script src="libs/SplitText.min-1.js"></script>
     </body>
-
 </html>
