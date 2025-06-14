@@ -8,16 +8,23 @@
         <link rel="shortcut icon" href="logo.svg" type="image/x-icon">
 	  
 <script>
-// Monkey-patch style access to prevent crash
-const originalQuerySelector = document.querySelector;
+// Prevent crash on missing DOM elements
+const originalQS = document.querySelector;
 document.querySelector = function(sel) {
-  const el = originalQuerySelector.call(document, sel);
-  if (!el) return new Proxy({}, { get: () => () => {} }); // dummy fallback
+  const el = originalQS.call(document, sel);
+  if (!el) {
+    console.warn(`Element not found: "${sel}" — patched to avoid crash.`);
+    return new Proxy({}, {
+      get: () => () => {} // Return empty functions for all calls
+    });
+  }
   return el;
 };
 </script>
 
-      <script type="module" crossorigin="" src="/js/main.min.js"></script>
+
+     <script src="/js/main.min.js"></script>
+
       <link rel="stylesheet" crossorigin="" href="css/style.min.css">
     </head>
     
